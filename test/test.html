@@ -63,20 +63,27 @@
         var x = 0;
         setInterval(() => {
 
-            setTimeout(() => {
-                viewSquare(x, y)
-                y++;
-            }, 1);
+            // setTimeout(() => {
+            //     viewSquare(x, y)
+            //     y++;
+            // }, 0);
 
-            if (y == columns) {
-                x++;
-                y = 0;
-                if (y == columns && x == rows) {
-                    x = 0;
-                    y = 0;
+            for (let x = 0; x < 501; x++) {
+                for (let y = 0; y < 501; y++) {
+                    viewSquare(x, y)
                 }
             }
-        }, 2);
+
+            // if (y == columns) {
+            //     x++;
+            //     y = 0;
+            //     if (y == columns && x == rows) {
+            //         x = 0;
+            //         y = 0;
+            //     }
+            // }
+
+        }, 5000);
 
         function viewSquare(aX, aY) {
 
@@ -86,8 +93,12 @@
 
             //  vwCtx.moveTo(aX, aY);
 
-            if (area[aX][aY] != 0)
-                vwCtx.fillText(area[aX][aY], aX, aY);
+            if (area[aX][aY] != 0) { vwCtx.fillText(area[aX][aY], aX, aY); }
+
+            // else {
+            //     vwCtx.fillStyle = 'green';
+            //     vwCtx.fillRect(0, 0, aX, aY);
+            // }
             // vwCtx.stroke();
 
         }
@@ -109,9 +120,12 @@
 
             document.getElementById('viewAEL').innerHTML = area[pos.x][pos.y];
 
-            let buffer = '.';
+            let buffer = '■';
             ctx.fillText(buffer, pos.x, pos.y);
             area[pos.x][pos.y] = buffer;
+
+
+
         });
 
     </script>
