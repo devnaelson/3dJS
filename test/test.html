@@ -97,18 +97,20 @@
             // console.log(canvas.width);
             // console.log(canvas.clientWidth);
             return {
-                x: evt.clientX - rect.left,
+                x: Math.round(evt.clientX - rect.left),
                 y: Math.round(evt.clientY - rect.top)
             };
         }
 
-        vwTest.addEventListener('mousemove', event => {
-            let pos = getMousePos(vwTest, event);
-            console.log(area[pos.x][pos.y]);
+        main.addEventListener('mousemove', event => {
+            let pos = getMousePos(main, event);
+
+            console.log(pos.x);
+
             document.getElementById('viewAEL').innerHTML = area[pos.x][pos.y];
 
             let buffer = '.';
-            vwCtx.fillText(buffer, pos.x, pos.y);
+            ctx.fillText(buffer, pos.x, pos.y);
             area[pos.x][pos.y] = buffer;
         });
 
