@@ -51,6 +51,8 @@
         main.width = main.clientWidth;//question? fix bug inregular pos, why needed have the same with client
         main.height = main.clientHeight;
 
+        //console.log(main.clientWidth + " "+ vwTest.clientWidth);//no one difference 
+
         vwTest.width = main.clientWidth;// test receive main
         vwTest.height = main.clientWidth;
 
@@ -64,8 +66,8 @@
             }
         }
 
-        var y = 0;
-        var x = 0;
+        // var y = 0;
+        // var x = 0;
         setInterval(() => {
 
             // setTimeout(() => {
@@ -73,8 +75,8 @@
             //     y++;
             // }, 0);
 
-            for (let x = 0; x < 501; x++) {
-                for (let y = 0; y < 501; y++) {
+            for (let x = 0; x < rows + 1; x++) { // fix bug when draw lack pos
+                for (let y = 0; y < columns + 1; y++) {
                     viewSquare(x, y)
                 }
             }
@@ -95,7 +97,7 @@
                 var gradient = ctx.createLinearGradient(0, 0, aX, 0);
                 gradient.addColorStop("0", "blue");
                 vwCtx.fillStyle = gradient;
-                vwCtx.font = "14px Verdana";
+                //  vwCtx.font = "14px Verdana";
                 vwCtx.fillText(area[aX][aY], aX, aY);
             }
         }
