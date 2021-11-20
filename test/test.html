@@ -44,7 +44,6 @@
         // vwTest.style.marginLeft = centerX;
         // vwTest.style.marginTop = centerY;
 
-
         var area = [];
         var rows = main.clientWidth;
         var columns = main.clientHeight;
@@ -86,21 +85,13 @@
         }, 5000);
 
         function viewSquare(aX, aY) {
-
-            // vwCtx.fillStyle = '#F1F2F3';
-            // vwCtx.fillStyle = 'green';
-            // vwCtx.fillRect(0, 0, aX, aY);
-
-            //  vwCtx.moveTo(aX, aY);
-
-            if (area[aX][aY] != 0) { vwCtx.fillText(area[aX][aY], aX, aY); }
-
-            // else {
-            //     vwCtx.fillStyle = 'green';
-            //     vwCtx.fillRect(0, 0, aX, aY);
-            // }
-            // vwCtx.stroke();
-
+            if (area[aX][aY] != 0) {
+                var gradient = ctx.createLinearGradient(0, 0, aX, 0);
+                gradient.addColorStop("0", "blue");
+                vwCtx.fillStyle = gradient;
+                vwCtx.font = "14px Verdana";
+                vwCtx.fillText(area[aX][aY], aX, aY);
+            }
         }
 
         function getMousePos(canvas, evt) {
@@ -115,17 +106,11 @@
 
         main.addEventListener('mousemove', event => {
             let pos = getMousePos(main, event);
-
             console.log(pos.x);
-
             document.getElementById('viewAEL').innerHTML = area[pos.x][pos.y];
-
             let buffer = '■';
             ctx.fillText(buffer, pos.x, pos.y);
             area[pos.x][pos.y] = buffer;
-
-
-
         });
 
     </script>
