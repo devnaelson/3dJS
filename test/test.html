@@ -94,7 +94,7 @@
 
         function getMousePos(canvas, evt) {
             var rect = canvas.getBoundingClientRect();
-            // console.log(canvas.width);
+            // console.log(canvas.width); question? Why is differ from clientW?
             // console.log(canvas.clientWidth);
             return {
                 x: Math.round(evt.clientX - rect.left),
