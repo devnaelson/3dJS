@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Page Title</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <div id="viewAEL"
+        style="width: 150px; height: 150px; position: absolute; right: 10px; background: black; text-align: center; color: chartreuse; top: 10px; line-height: 147px;">
+        A</div>
+    <canvas id="main" style="border: solid 1px;"></canvas>
+    <canvas id="vwTest" style="border: solid blue 1px;"></canvas>
+
+    <script>
+
+        var nW = 500;
+        var nH = 500;
+
+        const main = document.getElementById('main');
+        main.width = nW;
+        main.height = nH;
+        const ctx = main.getContext('2d');
+
+        const vwTest = document.getElementById('vwTest');
+        vwTest.width = nW;
+        vwTest.height = nH;
+        const vwCtx = vwTest.getContext('2d');
+
+
+        // var wPagX = window.innerWidth
+        //     || document.documentElement.clientWidth
+        //     || document.body.clientWidth;
+
+        // var hPagY = window.innerHeight
+        //     || document.documentElement.clientHeight
+        //     || document.body.clientHeight;
+
+
+        // let centerX = (wPagX - vwTest.width) / 2;
+        // let centerY = (hPagY - vwTest.height) / 2;
+
+        // vwTest.style.marginLeft = centerX;
+        // vwTest.style.marginTop = centerY;
+
+
+        var area = [];
+        var rows = main.clientWidth;
+        var columns = main.clientHeight;
+
+        fill2DimensionsArray(area, rows, columns);
+        function fill2DimensionsArray(area, rows, columns) {
+            for (var i = 0; i < rows + 1; i++) {
+                area.push([0]);
+                for (var j = 0; j < columns + 1; j++) {
+                    area[i][j] = 0;
+                }
+            }
+        }
+
+        var y = 0;
+        var x = 0;
+        setInterval(() => {
+
+            setTimeout(() => {
+                viewSquare(x, y)
+                y++;
+            }, 1);
+
+            if (y == columns) {
+                x++;
+                y = 0;
+                if (y == columns && x == rows) {
+                    x = 0;
+                    y = 0;
+                }
+            }
+        }, 2);
+
+        function viewSquare(aX, aY) {
+
+            // vwCtx.fillStyle = '#F1F2F3';
+            // vwCtx.fillStyle = 'green';
+            // vwCtx.fillRect(0, 0, aX, aY);
+
+            //  vwCtx.moveTo(aX, aY);
+
+            if (area[aX][aY] != 0)
+                vwCtx.fillText(area[aX][aY], aX, aY);
+            // vwCtx.stroke();
+
+        }
+
+        function getMousePos(canvas, evt) {
+            var rect = canvas.getBoundingClientRect();
+            // console.log(canvas.width);
+            // console.log(canvas.clientWidth);
+            return {
+                x: evt.clientX - rect.left,
+                y: Math.round(evt.clientY - rect.top)
+            };
+        }
+
+        vwTest.addEventListener('mousemove', event => {
+            let pos = getMousePos(vwTest, event);
+            console.log(area[pos.x][pos.y]);
+            document.getElementById('viewAEL').innerHTML = area[pos.x][pos.y];
+
+            let buffer = '.';
+            vwCtx.fillText(buffer, pos.x, pos.y);
+            area[pos.x][pos.y] = buffer;
+        });
+
+    </script>
+</body>
+
+</html>
