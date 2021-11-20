@@ -15,17 +15,17 @@
 
     <script>
 
-        var nW = 500;
-        var nH = 500;
+        // var nW = 500;
+        // var nH = 500;
 
         const main = document.getElementById('main');
-        main.width = nW;
-        main.height = nH;
+        // main.width = nW;
+        // main.height = nH;
         const ctx = main.getContext('2d');
 
         const vwTest = document.getElementById('vwTest');
-        vwTest.width = nW;
-        vwTest.height = nH;
+        // vwTest.width = nW;
+        // vwTest.height = nH;
         const vwCtx = vwTest.getContext('2d');
 
 
@@ -47,6 +47,12 @@
         var area = [];
         var rows = main.clientWidth;
         var columns = main.clientHeight;
+
+        main.width = main.clientWidth;//question? fix bug inregular pos, why needed have the same with client
+        main.height = main.clientHeight;
+
+        vwTest.width = main.clientWidth;// test receive main
+        vwTest.height = main.clientWidth;
 
         fill2DimensionsArray(area, rows, columns);
         function fill2DimensionsArray(area, rows, columns) {
@@ -106,7 +112,9 @@
 
         main.addEventListener('mousemove', event => {
             let pos = getMousePos(main, event);
-            console.log(pos.x);
+
+            console.log(pos);
+
             document.getElementById('viewAEL').innerHTML = area[pos.x][pos.y];
             let buffer = '■';
             ctx.fillText(buffer, pos.x, pos.y);
