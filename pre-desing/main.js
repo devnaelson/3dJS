@@ -18,7 +18,7 @@ vwTest.width = main.clientWidth;// test receive main
 vwTest.height = main.clientWidth;
 
 area = fillSquare({ a: area, r: rows, c: columns });
-Tview({ a: area, r: rows, c: columns },vwCtx);
+Tview({ a: area, r: rows, c: columns }, vwCtx);
 
 function getMousePos(canvas, evt) {
     var rect = canvas.getBoundingClientRect();
@@ -30,11 +30,28 @@ function getMousePos(canvas, evt) {
     };
 }
 
+var cntrlIsPressed = false;
+document.addEventListener('mousedown', function () {
+    cntrlIsPressed = true;
+});
+
+document.addEventListener('mouseup', function (event) {
+    cntrlIsPressed = false;
+});
+
 main.addEventListener('mousemove', event => {
+
     let pos = getMousePos(main, event);
     console.log(pos);
+
+    console.log( area[pos.x][pos.y]);
+
     document.getElementById('viewAEL').innerHTML = area[pos.x][pos.y];
-    let buffer = 'A';
-    ctx.fillText(buffer, pos.x, pos.y);
-    area[pos.x][pos.y] = buffer;
+
+    if (cntrlIsPressed == true) {
+        let buffer = '■';
+        ctx.font = "16px Arial";
+        ctx.fillText(buffer, pos.x, pos.y);
+        area[pos.x][pos.y] = buffer;
+    }
 });

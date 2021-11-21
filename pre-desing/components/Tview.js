@@ -10,7 +10,7 @@ export default function Tview(proper, vwCtx, msInterval = 5000, split = false) {
         if (split == true) {
 
             setTimeout(() => {
-                viewSquare(x_spl, y_spl, vwCtx)
+                viewSquare(x_spl, y_spl,vwCtx)
                 y_spl++;
             }, 0);
 
@@ -33,7 +33,7 @@ export default function Tview(proper, vwCtx, msInterval = 5000, split = false) {
 
     }, msInterval);
 
-    function viewSquare(aX, aY, vwCtx) {
+    function viewSquare(aX, aY,vwCtx) {
         if (proper.a[aX][aY] != 0) {
             let gradient = vwCtx.createLinearGradient(0, 0, aX, 0);
             gradient.addColorStop("0", "blue");
